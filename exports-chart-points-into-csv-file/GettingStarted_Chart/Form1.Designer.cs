@@ -99,21 +99,20 @@ namespace GettingStarted_Chart
             foreach (ChartSeries series in this.chartControl1.Series)
             {
                 string seriesName = series.Name;
-                int pointCount = series.Points.Count;
                 string seriesType = series.Type.ToString();
-
-                for (int p = 0; p < pointCount; p++)
+                for (int count = 0; count < series.Points.Count; count++)
                 {
-                    ChartPoint point = series.Points[p];
+                    ChartPoint point = series.Points[count];
                     string yValuesCSV = String.Empty;
-                    int count = point.YValues.Length;
-
-                    for (int i = 0; i < count; i++)
+                    double[] yValues = point.YValues;
+                    int length = yValues.Length;
+                    for (int i = 0; i < length; i++)
                     {
                         yValuesCSV += point.YValues[i];
-                        if (i != count - 1)
+                        if (i != length - 1)
                             yValuesCSV += comma;
                     }
+
                     csvLine = seriesName + "-" + seriesType + comma + point.Category + comma + yValuesCSV;
                     csvContent += csvLine + "\r\n";
                 }
